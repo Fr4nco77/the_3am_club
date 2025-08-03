@@ -1,17 +1,29 @@
 ---
 import "../styles/global.css";
+import Sidebar from "@components/sidebar/Sidebar.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>The 3 a.m Club</title>
   </head>
   <body>
+    <div
+      class="mx-auto grid h-full md:max-h-screen w-full max-w-[1400px] gap-8 px-4 py-8 lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
+    >
+      <Sidebar />
+      <div
+        class="h-full w-full rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm"
+      >
+        <slot />
+      </div>
+    </div>
+
     <slot />
   </body>
 </html>

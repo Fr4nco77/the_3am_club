@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  job: string;
+  image: string;
+  color?: "purple" | "cyan";
+}
+
+const { name, job, image, color = "purple" }: Props = Astro.props;
+---
+
+<div
+  class:list={[
+    "flex items-center space-x-3 rounded-[10px] border p-3",
+    color === "purple" ? "border-purple-500/30" : "border-cyan-500/30",
+  ]}
+>
+  <div
+    class:list={[
+      "flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-2",
+      color === "purple" ? "border-purple-500/70" : "border-cyan-500/70",
+    ]}
+  >
+    <Image
+      src={image}
+      alt=`Avatar de ${name}`
+      width={48}
+      height={48}
+      loading="eager"
+      decoding="async"
+      class="object-cover"
+    />
+  </div>
+  <div class="overflow-hidden text-left">
+    <p class="truncate font-medium tracking-wide text-white">{name}</p>
+    <p
+      class:list={[
+        "truncate text-sm tracking-wider uppercase",
+        color === "purple" ? "text-purple-300" : "text-cyan-300",
+      ]}
+    >
+      {job}
+    </p>
+  </div>
+</div>

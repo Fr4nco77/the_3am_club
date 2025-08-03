@@ -1,0 +1,42 @@
+---
+import ButtonClose from "@components/nav/ButtonClose.astro";
+import Link from "@components/nav/Link.astro";
+---
+
+<div
+  id="nav_menu"
+  class="fixed top-0 left-0 z-10 flex h-full -translate-x-full flex-col overflow-y-auto border-r-2 border-[#790063] bg-gradient-to-br from-[#2d1b3d] via-[#1a0d2e] to-[#0f0519] p-4 transition-transform duration-300 ease-in-out md:p-8"
+>
+  <div class="mb-8 px-4">
+    <ButtonClose />
+    <h3 class="mb-2 text-2xl font-bold tracking-wider text-white">EXPLORA</h3>
+    <div
+      class="h-0.5 w-16 bg-gradient-to-r from-transparent via-[#790063] to-transparent"
+    >
+    </div>
+  </div>
+  <nav class="flex-1 space-y-4" aria-label="Navegación principal">
+    <Link title="INICIO" to="/" />
+    <Link title="EPISODIOS" to="/episodes" />
+    <Link title="SOBRE NOSOTROS" to="/about" />
+    <Link title="CONTACTO" to="/contact" color="bg-amber-500" />
+    <Link title="SPONSORS" to="/sponsor" color="bg-red-500" />
+  </nav>
+  <div class="mt-8 text-center">
+    <p
+      class="mb-4 text-xs font-light tracking-[0.3em] text-purple-300 uppercase"
+    >
+      ~ explora la dimensión ~
+    </p>
+    <div class="flex justify-center space-x-2">
+      <span class="h-3 w-3 animate-spin rounded-full border border-cyan-400/60">
+      </span>
+      <span
+        class="h-3 w-3 rotate-45 animate-pulse border border-purple-400/60"
+      >
+      </span>
+      <span class="h-3 w-3 animate-spin rounded-full border border-pink-400/60">
+      </span>
+    </div>
+  </div>
+</div>

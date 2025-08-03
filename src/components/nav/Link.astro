@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  to: string;
+  color?: string;
+}
+
+const { title, to, color } = Astro.props;
+---
+
+<a
+  class="flex h-14 w-full items-center space-x-4 rounded-[10px] border border-transparent px-4 py-2 text-lg tracking-wider text-purple-200 transition-all duration-300 hover:border-[#790063] hover:bg-[#790063]/20 hover:text-white"
+  href={to}
+>
+  <div
+    class:list={[
+      "h-2 w-2 animate-pulse rounded-full",
+      color || "bg-cyan-300",
+    ]}
+  >
+  </div>
+  <div class="uppercase">{title}</div>
+</a>

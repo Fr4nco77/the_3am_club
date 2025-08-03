@@ -1,0 +1,22 @@
+<button
+  id="close_menu"
+  class="absolute top-4 right-4 md:top-8 md:right-8 aspect-square w-8 cursor-pointer drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-transform hover:scale-110"
+>
+  <img
+    src="/close.svg"
+    alt="Icono de cerrar menu desplegable de la navegacion"
+    class="h-full w-full"
+  />
+</button>
+
+<script>
+  document.getElementById("close_menu")?.addEventListener("click", () => {
+    const nav = document.getElementById("nav_menu");
+    if (nav) {
+      nav.classList.add("-translate-x-full");
+      document.getElementById("sidebar")?.classList.toggle("overflow-y-auto");
+      document.getElementById("nav_backdrop")?.classList.add("hidden");
+      return;
+    }
+  });
+</script>

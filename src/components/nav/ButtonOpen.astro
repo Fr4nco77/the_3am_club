@@ -1,0 +1,21 @@
+<button
+  id="open_menu"
+  class="absolute z-2 top-4 left-4 md:top-8 md:left-8 aspect-square w-10 md:w-12 animate-pulse cursor-pointer drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-transform hover:scale-110 hover:animate-none"
+>
+  <img
+    src="/menu_eye.webp"
+    alt="Icono de menu desplegable de la navegacion en forma de ojo"
+  />
+</button>
+
+<script>
+  document.getElementById("open_menu")?.addEventListener("click", () => {
+    const nav = document.getElementById("nav_menu");
+    if (nav) {
+      nav.classList.remove("-translate-x-full");
+      document.getElementById("sidebar")?.classList.remove("overflow-y-auto");
+      document.getElementById("nav_backdrop")?.classList.remove("hidden");
+      return;
+    }
+  });
+</script>
