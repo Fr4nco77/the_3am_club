@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Player from "@components/player/Player";
 import Sidebar from "@components/sidebar/Sidebar.astro";
 ---
 
@@ -18,12 +19,13 @@ import Sidebar from "@components/sidebar/Sidebar.astro";
     >
       <Sidebar />
       <div
-        class="h-full w-full rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm"
-      >
-        <slot />
+        class="size-full grid grid-rows-[100px_1fr] gap-8"
+        >
+        <Player client:load/>
+        <div class="w-full rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm">
+          <slot />
+        </div>
       </div>
     </div>
-
-    <slot />
   </body>
 </html>
