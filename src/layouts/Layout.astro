@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Player from "@components/player/Player";
 import Sidebar from "@components/sidebar/Sidebar.astro";
+const { pageTitle } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,18 +12,18 @@ import Sidebar from "@components/sidebar/Sidebar.astro";
     <meta name="viewport" content="width=device-width" />
     <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
     <meta name="generator" content={Astro.generator} />
-    <title>The 3 a.m Club</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
     <div
-      class="mx-auto grid h-full md:max-h-screen w-full max-w-[1400px] gap-8 px-4 py-8 lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
+      class="mx-auto grid h-full w-full max-w-[1400px] gap-8 px-4 py-8 md:max-h-screen lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
     >
       <Sidebar />
-      <div
-        class="size-full grid grid-rows-[100px_1fr] gap-8"
+      <div class="grid size-full grid-rows-[100px_1fr] gap-8">
+        <Player client:load />
+        <div
+          class="w-full rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm"
         >
-        <Player client:load/>
-        <div class="w-full rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm">
           <slot />
         </div>
       </div>
