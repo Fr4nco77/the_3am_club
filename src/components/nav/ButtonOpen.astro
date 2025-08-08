@@ -1,6 +1,6 @@
 <button
   id="open_menu"
-  class="absolute z-2 top-4 left-4 md:top-8 md:left-8 aspect-square w-10 md:w-12 animate-pulse cursor-pointer drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-transform hover:scale-110 hover:animate-none"
+  class="absolute top-4 left-4 z-2 aspect-square w-10 animate-pulse cursor-pointer drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] transition-all duration-300 ease-in-out hover:scale-110 hover:animate-none md:top-8 md:left-8 md:w-12"
 >
   <img
     src="/menu_eye.webp"
@@ -11,10 +11,18 @@
 <script>
   document.getElementById("open_menu")?.addEventListener("click", () => {
     const nav = document.getElementById("nav_menu");
+    const overlay = document.getElementById("nav_backdrop");
+    const sidebar = document.getElementById("sidebar");
+
     if (nav) {
       nav.classList.remove("-translate-x-full");
-      document.getElementById("sidebar")?.classList.remove("overflow-y-auto");
-      document.getElementById("nav_backdrop")?.classList.remove("hidden");
+      sidebar?.classList.remove("overflow-y-auto");
+      overlay?.classList.remove(
+        "opacity-0",
+        "invisible",
+        "pointer-events-none",
+      );
+      overlay?.classList.add("opacity-100", "visible", "pointer-events-auto");
       return;
     }
   });
