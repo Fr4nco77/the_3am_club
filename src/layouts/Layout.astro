@@ -9,20 +9,19 @@ const { pageTitle } = Astro.props;
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
   <body>
     <div
-      class="mx-auto grid h-full w-full max-w-[1400px] gap-8 px-4 py-8 md:max-h-screen lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
+      class="mx-auto grid h-auto w-full max-w-[1400px] gap-8 px-4 py-8 lg:h-full lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
     >
       <Sidebar />
-      <div class="grid size-full grid-rows-[100px_1fr] gap-8">
+      <div class="grid min-h-0 grid-rows-[100px_1fr] gap-8">
         <Player client:load />
         <div
-          class="w-full rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm"
+          class="rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm lg:min-h-0 lg:overflow-y-auto"
         >
           <slot />
         </div>
