@@ -1,4 +1,4 @@
-import { VolumeOff, VolumeOn } from "@assets/iconsPlayer";
+import { VolumeOff, VolumeOn } from "@assets/icons";
 import { useEffect, useRef } from "react";
 import { usePlayerStore } from "src/store/playerStore";
 
@@ -30,7 +30,7 @@ export default function VolumeControl({ audio }: SoundControlProps) {
       <button
         onClick={handleMute}
         aria-label={volume > 0 ? "Silenciar" : "Activar sonido"}
-        className="w-5 cursor-pointer text-white transition-transform hover:scale-110"
+        className="w-5 cursor-pointer text-white transition-transform duration-300 ease-in-out hover:scale-110"
       >
         {volume > 0 ? <VolumeOn /> : <VolumeOff />}
       </button>
