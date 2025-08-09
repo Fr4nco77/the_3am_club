@@ -1,5 +1,73 @@
 ---
+import { Info } from "@assets/icons";
+import Badge from "@components/Badge.astro";
+import PlayPauseButton from "@components/player/PlayPauseButton";
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+const pageTitle = "The 3 A.M Club";
+const episodes = await getCollection("podcast");
+// Ordenar por fecha y tomar el más reciente
+const sortedEpisodes = episodes.sort((a, b) => {
+  return (
+    new Date(b.data.created_at).getTime() -
+    new Date(a.data.created_at).getTime()
+  );
+});
+
+const { id, data } = sortedEpisodes[0];
+const { title, description, cover, image, audio, category } = data;
 ---
 
-<Layout />
+<Layout pageTitle={pageTitle}>
+  <div class="mb-6">
+    <h2
+      class="mb-2 border-b border-[#790063]/50 pb-2 text-2xl font-bold tracking-wider text-white"
+    >
+      ÚLTIMO EPISODIO
+    </h2>
+  </div>
+  <div class="relative mb-6">
+    <Badge
+      class="absolute top-1.5 left-1.5 border-purple-500/50 bg-black/60 md:top-3 md:left-3"
+    >
+      {category}
+    </Badge>
+    <Image
+      src={cover}
+      alt={`Caratula de ${title}`}
+      loading="eager"
+      inferSize
+      width={1}
+      height={1}
+      class="aspect-video w-full rounded-[10px] border-2 border-purple-500/50 bg-black/60 shadow-lg"
+    />
+  </div>
+  <div class="mb-6">
+    <h3 class="mb-3 text-xl font-bold tracking-wide text-white">
+      {title}
+    </h3>
+    <p
+      class="border-l-2 border-cyan-400/50 pl-4 leading-relaxed font-light tracking-wide text-purple-200"
+    >
+      {description}
+    </p>
+  </div>
+  <div class="flex flex-col gap-2 md:flex-row md:gap-4">
+    <PlayPauseButton
+      client:load
+      podcast={{ id, title, image, audio }}
+      className="h-12 w-full rounded-[10px] border-2 border-[#790063] p-2 text-lg font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:scale-105 hover:bg-[#790063]/20 md:h-14 md:p-3"
+    >
+      <span>REPRODUCIR</span>
+    </PlayPauseButton>
+    <a
+      href={`/episodes/${id}`}
+      class="flex h-12 w-full items-center justify-center gap-2 rounded-[10px] border-2 border-cyan-400 p-2 text-lg font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:scale-105 hover:bg-cyan-400/20 md:h-14 md:p-3"
+    >
+      <Info />
+      <span>Detalles</span>
+    </a>
+  </div>
+</Layout>
