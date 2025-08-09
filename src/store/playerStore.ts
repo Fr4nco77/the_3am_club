@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export interface Podcast {
+  id: string;
   title: string;
   image: string;
   audio: string;
@@ -19,11 +20,7 @@ export interface PlayerStore {
 
 export const usePlayerStore = create<PlayerStore>((set) => ({
   isPlaying: false,
-  currentPodcast: {
-    title: "Title Podcast",
-    image: "/podcast_image.webp",
-    audio: "/mp3s/Sample1.mp3"
-  },
+  currentPodcast: null,
   currentTime: 0,
   volume: 0.1,
   setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
