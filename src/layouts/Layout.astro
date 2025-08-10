@@ -1,8 +1,16 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Player from "@components/player/Player";
 import Sidebar from "@components/sidebar/Sidebar.astro";
+
+interface Props {
+  pageTitle?: string;
+}
+
 const { pageTitle } = Astro.props;
+const siteTitle = "The 3 A.M Club";
+const finalTitle = [siteTitle, pageTitle].filter(Boolean).join(" | ");
 ---
 
 <!doctype html>
@@ -11,7 +19,8 @@ const { pageTitle } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <title>{finalTitle}</title>
+    <ClientRouter />
   </head>
   <body>
     <div
@@ -19,7 +28,7 @@ const { pageTitle } = Astro.props;
     >
       <Sidebar />
       <div class="grid min-h-0 grid-rows-[100px_1fr] gap-8">
-        <Player client:load />
+        <Player client:load transition:persist/>
         <div
           class="rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm lg:min-h-0 lg:overflow-y-auto"
         >

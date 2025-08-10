@@ -13,74 +13,77 @@ import { Image } from "astro:assets";
   decoding="async"
 />
 
-<script>
-  const wrapper = document.getElementById("hero");
-  const image = document.getElementById("crazy_image");
+<script is:inline data-astro-rerun>
+  (function() {
+    const wrapper = document.getElementById("hero");
+    if (!wrapper) return; 
+    const image = document.getElementById("crazy_image");
 
-  let width = 0,
-    height = 0;
-  let halfWidth = 0,
-    halfHeight = 0;
+    let width = 0,
+      height = 0;
+    let halfWidth = 0,
+      halfHeight = 0;
 
-  const updateBounds = () => {
-    const rect = wrapper!.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
-    halfWidth = width / 2;
-    halfHeight = height / 2;
-  };
+    const updateBounds = () => {
+      const rect = wrapper.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      halfWidth = width / 2;
+      halfHeight = height / 2;
+    };
 
-  updateBounds();
-  window.addEventListener("resize", updateBounds);
+    updateBounds();
+    window.addEventListener("resize", updateBounds);
 
   // Rotaciones objetivo y actuales
-  let targetX = 0,
-    targetY = 0;
-  let currentX = 0,
-    currentY = 0;
-  const ease = 0.1;
+    let targetX = 0,
+      targetY = 0;
+    let currentX = 0,
+      currentY = 0;
+    const ease = 0.1;
 
-  let animating = false;
-  let rafId;
+    let animating = false;
+    let rafId;
 
-  const animate = () => {
-    currentX += (targetX - currentX) * ease;
-    currentY += (targetY - currentY) * ease;
+    const animate = () => {
+      currentX += (targetX - currentX) * ease;
+      currentY += (targetY - currentY) * ease;
 
-    image!.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      image.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
 
     // Si todavía no estamos en el objetivo, seguimos animando
-    if (
-      Math.abs(targetX - currentX) > 0.01 ||
-      Math.abs(targetY - currentY) > 0.01
-    ) {
-      rafId = requestAnimationFrame(animate);
-    } else {
+      if (
+        Math.abs(targetX - currentX) > 0.01 ||
+        Math.abs(targetY - currentY) > 0.01
+      ) {
+        rafId = requestAnimationFrame(animate);
+      } else {
       animating = false; // pausa automática
-    }
-  };
+      }
+    };
 
-  const startAnimation = () => {
-    if (!animating) {
-      animating = true;
-      rafId = requestAnimationFrame(animate);
-    }
-  };
+    const startAnimation = () => {
+      if (!animating) {
+        animating = true;
+        rafId = requestAnimationFrame(animate);
+      }
+    };
 
-  wrapper!.addEventListener("mousemove", (event) => {
-    const rect = wrapper!.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    wrapper.addEventListener("mousemove", (event) => {
+      const rect = wrapper.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
 
-    targetX = ((halfHeight - y) / halfHeight) * 30;
-    targetY = ((x - halfWidth) / halfWidth) * 30;
+      targetX = ((halfHeight - y) / halfHeight) * 30;
+      targetY = ((x - halfWidth) / halfWidth) * 30;
 
     startAnimation(); // arranca solo si hace falta
-  });
+    });
 
-  wrapper!.addEventListener("mouseleave", () => {
-    targetX = 0;
-    targetY = 0;
+    wrapper.addEventListener("mouseleave", () => {
+      targetX = 0;
+      targetY = 0;
     startAnimation(); // vuelve suavemente al centro y luego se pausa
-  });
+    });
+  })();
 </script>
