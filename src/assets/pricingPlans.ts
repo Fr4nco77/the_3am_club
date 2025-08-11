@@ -1,4 +1,4 @@
-interface Plan {
+export interface Plan {
   image?: string;
   planName: string;
   price: string;

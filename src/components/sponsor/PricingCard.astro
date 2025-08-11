@@ -1,17 +1,9 @@
 ---
+import type { Plan } from "@assets/pricingPlans";
+
 interface Props {
   popular?: boolean;
-  plan: {
-    image?: string;
-    planName: string;
-    price: string;
-    details: Array<string>;
-    textColor: string;
-    border: string;
-    hoverBorder: string;
-    button: string;
-    hoverButton: string;
-  };
+  plan: Plan;
 }
 
 const { plan, popular } = Astro.props;
