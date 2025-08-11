@@ -1,0 +1,67 @@
+---
+import type { Host } from "@assets/hostsData";
+import { Image } from "astro:assets";
+
+interface Props {
+  host: Host;
+}
+
+const { host } = Astro.props;
+const {
+  borderCardColor,
+  borderAvatarColor,
+  liveColor,
+  avatarImage,
+  name,
+  job,
+  jobColor,
+  description,
+  descriptionColor,
+} = host;
+---
+
+<div class:list={["rounded-[10px] border bg-black/30 p-6", borderCardColor]}>
+  <div class="flex items-center space-x-6">
+    {/* Host Photo */}
+    <div class="flex-shrink-0">
+      <div
+        class:list={[
+          "relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 bg-black/60",
+          borderAvatarColor,
+        ]}
+      >
+        <Image width={1} height={1} src={avatarImage} alt={`Foto de ${name}`} class="aspect-square w-full" loading="lazy"/>
+        <div
+          class:list={[
+            "absolute -top-1 -right-1 h-4 w-4 animate-pulse rounded-full border-2",
+            liveColor,
+          ]}
+        >
+        </div>
+      </div>
+    </div>
+
+    {/* Host Info */}
+    <div class="flex-1">
+      <h4 class="mb-1 text-xl font-bold tracking-wide text-white">
+        {name}
+      </h4>
+      <p class:list={["mb-3 text-sm tracking-wider text-purple-300", jobColor]}>
+        {job}
+      </p>
+      <p
+        class:list={[
+          "mb-4 text-sm tracking-wide text-cyan-400 italic",
+          descriptionColor,
+        ]}
+      >
+        {description}
+      </p>
+
+      {/* Host Social Media */}
+      <div class="flex flex-wrap items-center gap-3">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

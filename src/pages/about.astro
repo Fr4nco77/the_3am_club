@@ -1,0 +1,215 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HostCard from "@components/about/HostCard.astro";
+import NetworksCard from "@components/about/NetworksCard.astro";
+import { Franco, Charles } from "@assets/hostsData";
+import {
+  Instagram,
+  X,
+  TikTok,
+  Facebook,
+  YouTube,
+  Twitch,
+  ApplePodcast,
+  Spotify,
+  LinkedIn,
+} from "@assets/socialIcons";
+
+const pageTitle = "Sobre Nosotros";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="mb-8 text-center">
+    <div class="mb-4">
+      <div
+        class="mx-auto mb-4 h-0.5 w-16 bg-gradient-to-r from-transparent via-[#790063] to-transparent"
+      >
+      </div>
+      <h2 class="mb-2 text-3xl font-bold tracking-wider text-white">
+        SOBRE EL SHOW
+      </h2>
+      <div
+        class="mx-auto h-0.5 w-24 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+      >
+      </div>
+    </div>
+  </div>
+  <div class="mb-8">
+    <div class="rounded-[10px] border border-purple-500/30 bg-black/30 p-6">
+      <p class="mb-4 text-center leading-relaxed text-purple-100">
+        <span class="font-semibold text-cyan-400">The 3AM Club</span> es un espacio
+        sagrado donde las almas despiertas se reúnen en las horas más místicas de
+        la noche.
+      </p>
+      <p class="mb-4 text-center leading-relaxed text-purple-200">
+        Exploramos los misterios de la conciencia, la espiritualidad y los
+        fenómenos paranormales que emergen cuando el velo entre dimensiones se
+        vuelve más delgado.
+      </p>
+      <p class="text-center text-sm leading-relaxed text-purple-300">
+        Cada episodio es un viaje hacia lo desconocido, donde la filosofía se
+        encuentra con lo sobrenatural y las experiencias trascendentales cobran
+        vida.
+      </p>
+    </div>
+  </div>
+  <div class="mb-16">
+    <h3
+      class="mb-4 border-b border-[#790063]/50 pb-2 text-center text-lg font-semibold tracking-wider text-white"
+    >
+      SÍGUENOS EN NUESTRAS REDES
+    </h3>
+    <div class="flex flex-wrap justify-center gap-6">
+      <NetworksCard
+        to="https://instagram.com"
+        label="instagram"
+        textColor="text-[#E4405F]/80"
+        hoverTextColor="hover:text-[#E4405F]"
+        size="h-10"
+      >
+        <Instagram />
+      </NetworksCard>
+      <NetworksCard
+        to="https://x.com"
+        label="x"
+        textColor="text-white/80"
+        hoverTextColor="hover:text-white"
+        size="h-10"
+      >
+        <X />
+      </NetworksCard>
+      <NetworksCard
+        to="https://facebook.com"
+        label="facebook"
+        textColor="text-[#1877F2]/80"
+        hoverTextColor="hover:text-[#1877F2]"
+        size="h-10"
+      >
+        <Facebook />
+      </NetworksCard>
+      <NetworksCard
+        to="https://youtube.com"
+        label="youtube"
+        textColor="text-[#FF0000]/80"
+        hoverTextColor="hover:text-[#FF0000]"
+        size="h-10"
+      >
+        <YouTube />
+      </NetworksCard>
+      <NetworksCard
+        to="https://twitch.com"
+        label="twitch"
+        textColor="text-[#9146FF]/80"
+        hoverTextColor="hover:text-[#9146FF]"
+        size="h-10"
+      >
+        <Twitch />
+      </NetworksCard>
+      <NetworksCard
+        to="https://spotify.com"
+        label="spotify"
+        textColor="text-[#1DB954]/80"
+        hoverTextColor="hover:text-[#1DB954]"
+        size="h-10"
+      >
+        <Spotify />
+      </NetworksCard>
+      <NetworksCard
+        to="https:/podcasts.apple.com"
+        label="apple podcasts"
+        textColor="text-[#9933CC]/80"
+        hoverTextColor="hover:text-[#9933CC]"
+        size="h-10"
+      >
+        <ApplePodcast />
+      </NetworksCard>
+      <NetworksCard
+        to="https:/tiktok.apple.com"
+        label="tiktok"
+        textColor="text-[#69C9D0]/80"
+        hoverTextColor="hover:text-[#69C9D0]"
+        size="h-10"
+      >
+        <TikTok />
+      </NetworksCard>
+    </div>
+  </div>
+  <div>
+    <div class="mb-6 text-center">
+      <div
+        class="mx-auto mb-4 h-0.5 w-16 bg-gradient-to-r from-transparent via-[#790063] to-transparent"
+      >
+      </div>
+      <h3 class="mb-2 text-2xl font-bold tracking-wider text-white">
+        CONOCE A LOS HOSTS
+      </h3>
+      <div
+        class="mx-auto h-0.5 w-20 bg-gradient-to-r from-transparent via-yellow-400 to-transparent"
+      >
+      </div>
+    </div>
+
+    <div id="hosts" class="space-y-6">
+      {/* Host 1 - Alex Rivera */}
+
+      <HostCard host={Franco}>
+        <NetworksCard
+          to="https://instagram.com"
+          label="instagram"
+          textColor="text-[#E4405F]/80"
+          hoverTextColor="hover:text-[#E4405F]"
+          size="h-6"
+        >
+          <Instagram />
+        </NetworksCard>
+        <NetworksCard
+          to="https://x.com"
+          label="x"
+          textColor="text-white/80"
+          hoverTextColor="hover:text-white"
+          size="h-6"
+        >
+          <X />
+        </NetworksCard>
+        <NetworksCard
+          to="https://facebook.com"
+          label="facebook"
+          textColor="text-[#1877F2]/80"
+          hoverTextColor="hover:text-[#1877F2]"
+          size="h-6"
+        >
+          <Facebook />
+        </NetworksCard>
+        <NetworksCard
+          to="https://linkedin.com"
+          label="linkedin"
+          textColor="text-[#1877F2]/80"
+          hoverTextColor="hover:text-[#1877F2]"
+          size="h-6"
+        >
+          <LinkedIn />
+        </NetworksCard>
+      </HostCard>
+      <HostCard host={Charles}>
+        <NetworksCard
+          to="https://x.com"
+          label="x"
+          textColor="text-white/80"
+          hoverTextColor="hover:text-white"
+          size="h-6"
+        >
+          <X />
+        </NetworksCard>
+        <NetworksCard
+          to="https://linkedin.com"
+          label="linkedin"
+          textColor="text-[#1877F2]/80"
+          hoverTextColor="hover:text-[#1877F2]"
+          size="h-6"
+        >
+          <LinkedIn />
+        </NetworksCard>
+      </HostCard>
+    </div>
+  </div>
+</Layout>

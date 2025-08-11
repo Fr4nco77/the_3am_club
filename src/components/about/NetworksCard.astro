@@ -1,0 +1,26 @@
+---
+interface Props {
+  to: string;
+  label: string;
+  textColor: string;
+  hoverTextColor: string;
+  size: string;
+}
+
+const { to, label, textColor, hoverTextColor, size } = Astro.props;
+---
+
+<a
+  href={to}
+  aria-label={`Seguir en ${label}`}
+  target="_blanck"
+  rel="noopener noreferrer"
+  class:list={[
+    "flex items-center space-x-2 rounded-[10px] bg-transparent transition-all duration-400 ease-in-out hover:scale-110",
+    size,
+    textColor,
+    hoverTextColor,
+  ]}
+>
+  <slot />
+</a>
