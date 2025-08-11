@@ -1,0 +1,168 @@
+---
+import Layout from "@layouts/Layout.astro";
+import MetricCard from "@components/sponsor/MetricCard.astro";
+import PricingCard from "@components/sponsor/PricingCard.astro";
+import { plan1, plan2, plan3 } from "@assets/pricingPlans";
+import ViewPercentage from "@components/sponsor/ViewPercentage.astro";
+
+const pageTitle = "Sponsor";
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="mb-8 text-center">
+    <div class="mb-4">
+      <div
+        class="mx-auto mb-4 h-0.5 w-16 bg-gradient-to-r from-transparent via-[#790063] to-transparent"
+      >
+      </div>
+      <h2 class="mb-2 text-3xl font-bold tracking-wider text-white">
+        SPONSORED
+      </h2>
+      <div
+        class="mx-auto h-0.5 w-24 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+      >
+      </div>
+    </div>
+    <p class="text-sm font-light tracking-[0.3em] text-purple-300 uppercase">
+      PATROCINA LA DIMENSIÓN NOCTURNA
+    </p>
+  </div>
+  <div class="mb-8">
+    <div class="rounded-[10px] border border-purple-500/30 bg-black/30 p-6">
+      <p class="mb-4 text-center leading-relaxed text-purple-100">
+        <span class="font-semibold text-cyan-400"
+          >Conecta con almas despiertas</span
+        > en las horas más profundas de la noche.
+      </p>
+      <p class="text-center text-sm leading-relaxed text-purple-300">
+        Tu marca resonará en conversaciones que trascienden dimensiones y
+        realidades.
+      </p>
+    </div>
+  </div>
+  <div class="mb-8">
+    <h3
+      class="mb-4 border-b border-[#790063]/50 pb-2 text-lg font-semibold tracking-wider text-white"
+    >
+      MÉTRICAS INTERDIMENSIONALES
+    </h3>
+    <div class="grid grid-cols-2 gap-4">
+      <MetricCard
+        data="47.3K"
+        dataLabel="USUARIOS ACTIVOS"
+        borderColor="border-cyan-500/30"
+        textColor="text-cyan-400"
+      />
+      <MetricCard
+        data="12.8K"
+        dataLabel="VIEWERS DIARIOS"
+        borderColor="border-purple-500/30"
+        textColor="text-purple-400"
+      /><MetricCard
+        data="3.2M"
+        dataLabel="IMPRESIONES/MES"
+        borderColor="border-pink-500/30"
+        textColor="text-pink-400"
+      /><MetricCard
+        data="89%"
+        dataLabel="ENGAGEMENT"
+        borderColor="border-yellow-500/30"
+        textColor="text-yellow-400"
+      />
+    </div>
+  </div>
+  <div class="mb-8">
+    <h3
+      class="mb-4 border-b border-[#790063]/50 pb-2 text-lg font-semibold tracking-wider text-white"
+    >
+      PAQUETES DE PATROCINIO
+    </h3>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <PricingCard plan={plan1} />
+      <PricingCard plan={plan2} popular />
+      <PricingCard plan={plan3} />
+    </div>
+
+    {/* Discount Info */}
+    <div
+      class="mt-6 rounded-[10px] border border-yellow-500/30 bg-black/30 p-4"
+    >
+      <div class="text-center">
+        <h4 class="mb-2 font-semibold tracking-wider text-yellow-400">
+          💫 DESCUENTOS POR VOLUMEN
+        </h4>
+        <div class="grid grid-cols-1 gap-4 text-sm md:grid-cols-3">
+          <div class="text-purple-300">
+            <span class="font-semibold text-green-400">5-9 menciones:</span> 10-15%
+            descuento
+          </div>
+          <div class="text-purple-300">
+            <span class="font-semibold text-cyan-400">10-19 menciones:</span> 20-25%
+            descuento
+          </div>
+          <div class="text-purple-300">
+            <span class="font-semibold text-purple-400">20+ menciones:</span> 30%
+            descuento + bonos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-8">
+    <h3
+      class="mb-4 border-b border-[#790063]/50 pb-2 text-lg font-semibold tracking-wider text-white"
+    >
+      ORIGEN DE NUESTROS VIEWERS
+    </h3>
+    <div class="space-y-4">
+      <ViewPercentage
+        place="🌍 TIERRA"
+        percentage="67%"
+        textColor="text-green-400"
+        gradientBar="from-green-500 to-green-400"
+      />
+      <ViewPercentage
+        place="🔴 MARTE"
+        percentage="12%"
+        textColor="text-red-400"
+        gradientBar="from-red-500 to-red-400"
+      />
+      <ViewPercentage
+        place="🌀 5TA DIMENSIÓN"
+        percentage="8%"
+        textColor="text-purple-400"
+        gradientBar="from-purple-500 to-purple-400"
+      />
+      <ViewPercentage
+        place="🔥 INFIERNO"
+        percentage="6%"
+        textColor="text-orange-400"
+        gradientBar="from-orange-500 to-red-500"
+      />
+      <ViewPercentage
+        place="🌌 UNIVERSO PARALELO"
+        percentage="4%"
+        textColor="text-cyan-400"
+        gradientBar="from-cyan-500 to-blue-400"
+      />
+      <ViewPercentage
+        place="✨ PLANO ASTRAL"
+        percentage="3%"
+        textColor="text-pink-400"
+        gradientBar="from-pink-500 to-purple-400"
+      />
+    </div>
+  </div>
+  <div class="flex items-center justify-center text-center">
+    <a
+      href="/contact"
+      class="hover:scale-105 rounded-[10px] border-2 border-cyan-400/50 bg-gradient-to-r from-[#790063] to-purple-600 px-8 py-4 font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:border-cyan-400 hover:from-purple-600 hover:to-[#790063] hover:shadow-cyan-400/20"
+    >
+      <div class="flex items-center space-x-3">
+        <div class="h-3 w-3 animate-pulse rounded-full bg-cyan-400"></div>
+        <span>PATROCINAR AHORA</span>
+        <div class="h-3 w-3 animate-pulse rounded-full bg-cyan-400"></div>
+      </div>
+    </a>
+  </div>
+</Layout>

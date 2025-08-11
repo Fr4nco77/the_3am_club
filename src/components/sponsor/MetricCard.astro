@@ -1,0 +1,22 @@
+---
+interface Props {
+  data: string;
+  dataLabel: string;
+  borderColor: string;
+  textColor: string;
+}
+
+const { data, dataLabel, borderColor, textColor } = Astro.props;
+---
+
+<div
+  class:list={[
+    "rounded-[10px] border bg-black/30 p-4 text-center",
+    borderColor,
+  ]}
+>
+  <div class:list={["mb-1 text-2xl font-bold text-cyan-400", textColor]}>
+    {data}
+  </div>
+  <div class="text-sm tracking-wider text-purple-300">{dataLabel}</div>
+</div>

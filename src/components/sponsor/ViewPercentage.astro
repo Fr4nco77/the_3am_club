@@ -1,0 +1,24 @@
+---
+interface Props {
+    place: string;
+    percentage: string;
+    textColor: string;
+    gradientBar: string;
+}
+
+const {place, percentage, textColor, gradientBar} = Astro.props;
+---
+
+<div class="space-y-2">
+  <div class="flex items-center justify-between">
+    <span class:list={["font-medium tracking-wide", textColor]}>{place}</span>
+    <span class="font-bold text-white">{percentage}</span>
+  </div>
+  <div class="h-2 w-full rounded-full bg-black/40">
+    <div
+      class:list={["h-2 rounded-full bg-gradient-to-r", gradientBar]}
+      style={{ width: percentage }}
+    >
+    </div>
+  </div>
+</div>

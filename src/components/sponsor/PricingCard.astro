@@ -1,0 +1,100 @@
+---
+interface Props {
+  popular?: boolean;
+  plan: {
+    image?: string;
+    planName: string;
+    price: string;
+    details: Array<string>;
+    textColor: string;
+    border: string;
+    hoverBorder: string;
+    button: string;
+    hoverButton: string;
+  };
+}
+
+const { plan, popular } = Astro.props;
+const {
+  image,
+  planName,
+  price,
+  details,
+  textColor,
+  border,
+  hoverBorder,
+  button,
+  hoverButton,
+} = plan;
+---
+
+<div
+  class:list={[
+    "relative flex flex-col rounded-[10px] border-2 bg-black/30 p-6 text-center transition-all duration-300",
+    border,
+    hoverBorder,
+  ]}
+>
+  {
+    popular && (
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 transform">
+        <div
+          class:list={[
+            "rounded-full px-3 py-1 text-xs font-bold tracking-wider text-white",
+            button,
+          ]}
+        >
+          MÁS POPULAR
+        </div>
+      </div>
+    )
+  }
+  <div class="mb-4">
+    {
+      image ? (
+        <img src={image} alt={planName} />
+      ) : (
+        <div
+          class:list={[
+            "mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full border-2",
+            border,
+          ]}
+        >
+          <div class="h-3 w-3 animate-pulse rounded-full bg-green-400" />
+        </div>
+      )
+    }
+    <h4 class:list={["mb-2 text-lg font-bold tracking-wide", textColor]}>
+      {planName}
+    </h4>
+  </div>
+
+  <div class="mb-6">
+    <div class="mb-2 text-3xl font-bold text-white">${price}</div>
+    <div class:list={["text-sm tracking-wider", textColor]}>POR MENCIÓN</div>
+  </div>
+
+  <div class="mb-6 space-y-2 text-left">
+    {
+      details.map((detail) => (
+        <div class="flex items-center text-sm text-purple-300">
+          <div class:list={["mr-2 h-2 w-2 rounded-full", button]} />
+          <span>{detail}</span>
+        </div>
+      ))
+    }
+  </div>
+
+  <a
+    href="/contact"
+    class:list={[
+      "mx-auto mt-auto rounded-[10px] border px-1 py-2 font-semibold tracking-wider text-white transition-all duration-500 ease-in-out hover:scale-105",
+      button,
+      border,
+      hoverButton,
+      hoverBorder,
+    ]}
+  >
+    PATROCINAR AHORA
+  </a>
+</div>
