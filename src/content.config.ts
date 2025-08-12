@@ -11,45 +11,7 @@ const podcast = defineCollection({
     image: z.string(),
     cover: z.string(),
     category: z.enum(["Entrevista", "Social", "Entrenimiento"]),
-    created_at: z.string(),
-    hosts: z.array(
-      z.object({
-        name: z.string(),
-        image: z.string(),
-        links: z.array(
-          z.object({
-            name: z.string(),
-            url: z.string(),
-          }),
-        ),
-      }),
-    ),
-    guests: z.array(
-      z.object({
-        name: z.string(),
-        image: z.string(),
-        links: z.array(
-          z.object({
-            name: z.string(),
-            url: z.string(),
-          }),
-        ),
-      }),
-    ),
-    links: z.object({
-      podcast: z.array(
-        z.object({
-          name: z.string(),
-          url: z.string(),
-        }),
-      ),
-      resources: z.array(
-        z.object({
-          name: z.string(),
-          url: z.string(),
-        }),
-      ),
-    }),
+    created_at: z.string()
   }),
 });
 
