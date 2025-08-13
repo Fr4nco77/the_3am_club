@@ -1,0 +1,40 @@
+---
+import EpisodesLayout from "@layouts/EpisodesLayout.astro";
+import Layout from "@layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const episodes = await getCollection("podcast");
+  const uniqueCategories = [
+    ...new Set(episodes.map((episode) => episode.data.category).flat()),
+  ];
+
+  return uniqueCategories.flatMap((category) => {
+    const filteredEpisodes = episodes.filter((episode) =>
+      episode.data.category.includes(category),
+    );
+
+    return paginate(filteredEpisodes, {
+      params: { category },
+      props: { categories: uniqueCategories },
+      pageSize: 5,
+    });
+  });
+}) satisfies GetStaticPaths;
+
+const { category } = Astro.params;
+const { page, categories } = Astro.props;
+const { data, url, currentPage, lastPage } = page;
+---
+
+<Layout pageTitle={category}>
+  <EpisodesLayout
+    data={data}
+    currentCategory={category}
+    categories={categories}
+    url={url}
+    currentPage={currentPage}
+    lastPage={lastPage}
+  />
+</Layout>
