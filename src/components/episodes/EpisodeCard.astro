@@ -1,0 +1,73 @@
+---
+import { Info } from "@assets/icons";
+import PlayPauseButton from "@components/player/PlayPauseButton";
+import { Image } from "astro:assets";
+
+interface Props {
+  episode: {
+    id: string;
+    title: string;
+    image: string;
+    audio: string;
+    description: string;
+    created_at: string;
+  };
+}
+
+const { episode } = Astro.props;
+const { id, title, image, audio, description, created_at } = episode;
+---
+
+<div
+  class="flex flex-col gap-4 rounded-[10px] border border-purple-500/30 bg-black/20 p-4 transition-colors hover:bg-black/40 xl:flex-row"
+>
+  <div class="flex items-center gap-4">
+    <div
+      class="hidden h-20 w-20 flex-shrink-0 overflow-hidden rounded-[8px] border border-purple-500/50 bg-black/60 sm:block"
+    >
+      <Image
+        src={image}
+        width={1}
+        height={1}
+        inferSize
+        alt={title}
+        loading="eager"
+        class="aspect-square w-full"
+      />
+    </div>
+
+    {/* Episode Info */}
+    <div class="min-w-0 flex-1">
+      <span class="mb-1 font-mono text-xs text-purple-300 md:text-sm">
+        {created_at}
+      </span>
+      <h3
+        class="mb-1 w-44 truncate text-sm font-medium text-white sm:w-auto md:text-lg"
+      >
+        {title}
+      </h3>
+      <p
+        class="line-clamp-2 text-xs leading-relaxed text-purple-200 md:text-sm"
+      >
+        {description}
+      </p>
+    </div>
+  </div>
+  {/* Action Buttons */}
+  <div class="flex flex-col items-center gap-2 md:flex-row xl:flex-col">
+    <PlayPauseButton
+      client:load
+      podcast={{ id, title, image, audio }}
+      className="h-9 w-full rounded-[10px] border-2 border-[#790063] p-2 text-base font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:scale-105 hover:bg-[#790063]/20 md:h-12 md:p-3 lg:text-sm"
+    >
+      <span>REPRODUCIR</span>
+    </PlayPauseButton>
+    <a
+      href={`/episodes/${id}`}
+      class="flex h-9 w-full items-center justify-center gap-2 rounded-[10px] border-2 border-cyan-400 p-2 text-base font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:scale-105 hover:bg-cyan-400/20 md:h-12 md:p-3 lg:text-sm"
+    >
+      <Info />
+      <span>DETALLES</span>
+    </a>
+  </div>
+</div>
