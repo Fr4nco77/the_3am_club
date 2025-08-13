@@ -7,11 +7,10 @@ const podcast = defineCollection({
     title: z.string(),
     description: z.string(),
     audio: z.string(),
-    duration: z.string(),
     image: z.string(),
     cover: z.string(),
-    category: z.enum(["Entrevista", "Social", "Entrenimiento"]),
-    created_at: z.string()
+    category: z.string().trim().toLowerCase(),
+    created_at: z.string(),
   }),
 });
 
