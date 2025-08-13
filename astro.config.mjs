@@ -7,6 +7,9 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
+  redirects: {
+    "/episodes": "/episodes/1"
+  },
   vite: {
     plugins: [tailwindcss()]
   },
