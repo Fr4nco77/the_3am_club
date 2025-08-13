@@ -16,6 +16,7 @@ export default function Player() {
     audioRef.current.src = currentPodcast.audio;
     audioRef.current.currentTime = 0;
     setCurrentTime(0);
+    setIsPlaying(true);
   }, [currentPodcast]);
 
   // Play / Pause
