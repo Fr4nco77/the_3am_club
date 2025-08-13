@@ -30,12 +30,23 @@ export default function PlayPauseButton({
 
   return (
     <button
-      className={`flex items-center justify-center cursor-pointer gap-2 bg-transparent ${className}`}
+      className={`flex cursor-pointer items-center justify-center gap-2 bg-transparent ${className}`}
       onClick={handlePlayPause}
       aria-label={isPlaying ? "Pausar" : "Reproducir"}
       {...props}
     >
-      {isPlaying ? <Pause /> : <Play />}
+      {podcast ? (
+        isPlaying && currentPodcast?.id === podcast.id ? (
+          <Pause />
+        ) : (
+          <Play />
+        )
+      ) : isPlaying ? (
+        <Pause />
+      ) : (
+        <Play />
+      )}
+
       {children}
     </button>
   );
