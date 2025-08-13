@@ -1,0 +1,66 @@
+---
+import EpisodeCard from "@components/episodes/EpisodeCard.astro";
+import Pagination from "@components/episodes/Pagination.astro";
+import Select from "@components/episodes/Select";
+import type { RenderedContent } from "astro:content";
+import type { InferEntrySchema } from "astro:content";
+
+interface Props {
+  data: {
+    id: string;
+    body?: string;
+    collection: "podcast";
+    data: InferEntrySchema<"podcast">;
+    rendered?: RenderedContent;
+    filePath?: string;
+  }[];
+  url: {
+    current: string;
+    prev?: string;
+    next?: string;
+    first?: string;
+    last?: string;
+  };
+  currentCategory?: string;
+  categories: string[];
+  currentPage: number;
+  lastPage: number;
+}
+
+const { data, url, currentPage, lastPage, currentCategory, categories } =
+  Astro.props;
+---
+
+<div
+  class="mb-6 flex flex-col items-center gap-3 border-b border-[#790063]/50 pb-4 md:flex-row md:justify-between"
+>
+  <h2 class="text-2xl font-bold tracking-wider text-white">EPISODIOS</h2>
+
+  <Select
+    client:load
+    currentCategory={currentCategory}
+    categories={categories}
+  />
+</div>
+<div
+  class="scrollbar-thin scrollbar-track-black/20 scrollbar-thumb-purple-500/50 mb-2 h-[400px] overflow-y-auto pr-2"
+>
+  <div class="space-y-4">
+    {
+      data.map((episode) => {
+        const { id, data } = episode;
+
+        return <EpisodeCard episode={{ id, ...data }} />;
+      })
+    }
+  </div>
+</div>
+<Pagination url={url} lastPage={lastPage} currentPage={currentPage} />
+
+<!-- <script>
+  document
+    .getElementById("categorySelect")!
+    .addEventListener("change", (e: any) => {
+      window.location.href = `/episodes/${e.target.value}`;
+    });
+</script> -->
