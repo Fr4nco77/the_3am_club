@@ -20,7 +20,7 @@ const pageTitle = "Contacto";
     <div class="rounded-[10px] border border-purple-500/30 bg-black/30 p-6">
       <p class="mb-4 text-center leading-relaxed text-purple-100">
         <span class="font-semibold text-cyan-400">Conecta con nosotros</span> y forma
-        parte de la conversación nocturna del alma.
+        parte de la conversación nocturna.
       </p>
       <p class="text-center text-sm leading-relaxed text-purple-300">
         Comparte tu experiencia, pregunta o mensaje en nuestro círculo sagrado
@@ -101,13 +101,13 @@ const pageTitle = "Contacto";
       <p class="mb-4 text-sm tracking-wider text-purple-300">
         O CONTÁCTANOS DIRECTAMENTE
       </p>
-      <div class="space-y-2">
+      <div class="space-y-1 md:space-x-3">
         <a
           href="mailto:contacto@3amclub.com"
           target="_blank"
           class="inline-block text-sm tracking-wide text-cyan-400 hover:underline"
         >
-          📧 contacto@3amclub.com
+          contacto@3amclub.com
         </a>
         <a
           href="https://wa.me/15553AMCLUB"
@@ -115,7 +115,7 @@ const pageTitle = "Contacto";
           rel="noopener noreferrer"
           class="inline-block text-sm tracking-wide text-purple-400 hover:underline"
         >
-          📱 WhatsApp: +1 (555) 3AM-CLUB
+          WhatsApp: +1 (555) 3AM-CLUB
         </a>
       </div>
     </div>
@@ -162,7 +162,7 @@ const pageTitle = "Contacto";
     const toast = document.createElement("div");
 
     toast.innerHTML = `
-      <div class="fixed top-4 right-4 lg:top-8 lg:right-8 flex items-center gap-2 px-4 py-2 rounded-[10px] border-2 border-[#790063] bg-black/80 p-8 shadow-2xl transform transition-transform duration-500 ease-in-out opacity-0 -translate-y-4 z-20 ${textColor}">
+      <div class="fixed top-4 right-4 lg:top-8 lg:right-8 flex items-center font-semibold gap-2 px-4 py-2 rounded-[10px] border-2 border-[#790063] bg-black/80 p-8 shadow-2xl transform transition-transform duration-500 ease-in-out opacity-0 -translate-y-4 z-20 ${textColor}">
         <span>${icon}</span>
         <span>${message}</span>
       </div>
