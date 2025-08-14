@@ -1,5 +1,6 @@
 ---
 import type { Plan } from "@assets/pricingPlans";
+import { Image } from "astro:assets";
 
 interface Props {
   popular?: boolean;
@@ -9,6 +10,7 @@ interface Props {
 const { plan, popular } = Astro.props;
 const {
   image,
+  hoverImage,
   planName,
   price,
   details,
@@ -22,7 +24,7 @@ const {
 
 <div
   class:list={[
-    "relative flex flex-col rounded-[10px] border-2 bg-black/30 p-6 text-center transition-all duration-300",
+    "group transition-color relative flex flex-col rounded-[10px] border-2 bg-black/30 p-6 text-center duration-300",
     border,
     hoverBorder,
   ]}
@@ -44,7 +46,18 @@ const {
   <div class="mb-4">
     {
       image ? (
-        <img src={image} alt={planName} />
+        <Image
+          src={image}
+          alt={planName}
+          width={1}
+          height={1}
+          class:list={[
+            "transition-color mx-auto mb-3 aspect-square w-28 rounded-full border-2 duration-300",
+            border,
+            hoverImage,
+          ]}
+          loading="lazy"
+        />
       ) : (
         <div
           class:list={[

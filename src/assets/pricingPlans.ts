@@ -1,5 +1,6 @@
 export interface Plan {
   image?: string;
+  hoverImage?: string;
   planName: string;
   price: string;
   details: Array<string>;
@@ -11,7 +12,8 @@ export interface Plan {
 }
 
 export const plan1: Plan = {
-  // image: "",
+  image: "/pricing/mencion_astral.webp",
+  hoverImage: "group-hover:border-green-400",
   planName: "MENCIÓN ASTRAL",
   price: "99",
   details: ["Mención de 30 segundos", "Alcance interdimensional"],
@@ -23,7 +25,8 @@ export const plan1: Plan = {
 };
 
 export const plan2: Plan = {
-  // image: "",
+  image: "/pricing/portal_dimensional.webp",
+  hoverImage: "group-hover:border-cyan-400",
   planName: "PORTAL DIMENSIONAL",
   price: "179",
   details: [
@@ -39,7 +42,8 @@ export const plan2: Plan = {
 };
 
 export const plan3: Plan = {
-  // image: "",
+  image: "/pricing/consiencia_cosmica.webp",
+  hoverImage: "group-hover:border-purple-400",
   planName: "CONSCIENCIA CÓSMICA",
   price: "299",
   details: [
