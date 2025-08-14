@@ -1,18 +1,18 @@
 ---
 interface Props {
-  image: string;
   to: string;
-  alt: string;
+  label: string;
 }
 
-const { image, to, alt } = Astro.props;
+const { to, label } = Astro.props;
 ---
 
 <a
   href={to}
+  aria-label={label}
   target="_blank"
-  class="aspect-square h-12 rounded-full border border-transparent p-3 transition-all duration-300 ease-in-out hover:scale-110 hover:border-purple-100"
+  class="aspect-square h-12 rounded-full border border-transparent p-2 transition-all duration-300 ease-in-out text-purple-100 hover:scale-110 hover:border-purple-100"
   rel="noopener noreferrer"
 >
-  <img src={image} alt={alt} />
+  <slot />
 </a>

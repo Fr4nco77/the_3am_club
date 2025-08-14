@@ -1,4 +1,11 @@
 ---
+import {
+  ApplePodcast,
+  Spotify,
+  TikTok,
+  Twitch,
+  YouTube,
+} from "@assets/socialIcons";
 import ButtonOpen from "@components/nav/ButtonOpen.astro";
 import Menu from "@components/nav/Menu.astro";
 import CardHost from "@components/sidebar/CardHost.astro";
@@ -77,31 +84,21 @@ import SocialLink from "@components/sidebar/SocialLink.astro";
         ESCÚCHANOS
       </h3>
       <div class="flex justify-center space-x-1 md:space-x-4">
-        <SocialLink
-          image="/networks/icon_apple.webp"
-          to="https://podcasts.apple.com/"
-          alt="Apple Podcasts"
-        />
-        <SocialLink
-          image="/networks/icon_spotify.webp"
-          to="https://open.spotify.com/"
-          alt="Spotify"
-        />
-        <SocialLink
-          image="/networks/icon_tik-tok.webp"
-          to="https://www.tiktok.com/"
-          alt="TikTok"
-        />
-        <SocialLink
-          image="/networks/icon_youtube.webp"
-          to="https://www.youtube.com/"
-          alt="YouTube"
-        />
-        <SocialLink
-          image="/networks/icon_twitch.webp"
-          to="https://www.twitch.tv/"
-          alt="Twitch"
-        />
+        <SocialLink to="https://podcasts.apple.com/" label="Apple Podcasts">
+          <ApplePodcast />
+        </SocialLink>
+        <SocialLink to="https://open.spotify.com/" label="Spotify">
+          <Spotify />
+        </SocialLink>
+        <SocialLink to="https://www.tiktok.com/" label="TikTok">
+          <TikTok />
+        </SocialLink>
+        <SocialLink to="https://www.youtube.com/" label="YouTube">
+          <YouTube />
+        </SocialLink>
+        <SocialLink to="https://www.twitch.tv/" label="Twitch">
+          <Twitch />
+        </SocialLink>
       </div>
     </div>
   </div>
