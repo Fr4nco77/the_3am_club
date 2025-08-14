@@ -48,6 +48,7 @@ export default function Select({
             </a>
             {categories.map((category) => (
               <a
+                key={category}
                 href={`/episodes/${category}/1`}
                 className="block border-b border-purple-500/20 px-3 py-2 text-sm text-white transition-colors last:border-b-0 hover:bg-purple-500/20 hover:text-cyan-400"
               >

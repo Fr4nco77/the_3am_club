@@ -45,7 +45,7 @@ const { data, url, currentPage, lastPage, currentCategory, categories } =
 <div
   class="scrollbar-thin scrollbar-track-black/20 scrollbar-thumb-purple-500/50 mb-2 h-[400px] overflow-y-auto pr-2"
 >
-  <div class="space-y-4">
+  <div class="space-y-6">
     {
       data.map((episode) => {
         const { id, data } = episode;
@@ -56,11 +56,3 @@ const { data, url, currentPage, lastPage, currentCategory, categories } =
   </div>
 </div>
 <Pagination url={url} lastPage={lastPage} currentPage={currentPage} />
-
-<!-- <script>
-  document
-    .getElementById("categorySelect")!
-    .addEventListener("change", (e: any) => {
-      window.location.href = `/episodes/${e.target.value}`;
-    });
-</script> -->
