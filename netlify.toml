@@ -1,4 +1,9 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+# Redirección para manejar rutas de SPA (y evitar errores 404 en recarga)
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
