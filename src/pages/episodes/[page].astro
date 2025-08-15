@@ -7,7 +7,13 @@ import EpisodesLayout from "@layouts/EpisodesLayout.astro";
 const pageTitle = "Episodios";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const episodes = await getCollection("podcast");
+  let episodes = await getCollection("podcast");
+  episodes = episodes.sort((a, b) => {
+    return (
+      new Date(b.data.created_at).getTime() -
+      new Date(a.data.created_at).getTime() 
+    );
+  });
   const uniqueCategories = [
     ...new Set(episodes.map((episode) => episode.data.category).flat()),
   ];
