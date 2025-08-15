@@ -68,7 +68,7 @@ export default function Player() {
               <img
                 src={currentPodcast.image}
                 alt={`Miniatura del podcast ${currentPodcast.title}`}
-                className="hidden aspect-square w-16 rounded-[10px] md:block"
+                className="hidden aspect-square w-16 rounded-[10px] border-2 border-[#790063] md:block"
               />
 
               <div className="flex flex-1 flex-col gap-y-3">
