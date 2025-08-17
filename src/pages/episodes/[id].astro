@@ -15,10 +15,11 @@ export async function getStaticPaths(): GetPaths {
     props: { episode },
   }));
 }
-
+const { id } = Astro.params;
 const { episode } = Astro.props;
 const { Content } = await render(episode);
-const { title, created_at, image, audio, cover, category } = episode.data;
+const { title, description, created_at, image, audio, cover, category } =
+  episode.data;
 
 const podcast = {
   id: episode.id,
@@ -28,7 +29,7 @@ const podcast = {
 };
 ---
 
-<Layout pageTitle={title}>
+<Layout pageTitle={title} description={description} url=`/episodes/${id}`>
   <div class="mb-4 flex items-center gap-6">
     <PlayPauseButton
       podcast={podcast}
@@ -43,7 +44,9 @@ const podcast = {
         <h2 class="text-2xl font-bold tracking-wide text-white">
           {title}
         </h2>
-        <Badge class="border-purple-500/50 bg-black/60 hidden md:block">{category}</Badge>
+        <Badge class="hidden border-purple-500/50 bg-black/60 md:block"
+          >{category}</Badge
+        >
       </div>
     </div>
   </div>
@@ -53,7 +56,7 @@ const podcast = {
     src={cover}
     alt={title}
     loading="eager"
-    class="mb-4 aspect-video w-full rounded-xl border border-purple-500/50"
+    class="mb-4 aspect-auto w-full rounded-xl border border-purple-500/50"
   />
   <div class="prose prose-purple prose-invert prose-lg mb-16 max-w-none">
     <Content />

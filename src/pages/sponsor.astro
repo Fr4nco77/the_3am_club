@@ -5,10 +5,13 @@ import PricingCard from "@components/sponsor/PricingCard.astro";
 import { plan1, plan2, plan3 } from "@assets/pricingPlans";
 import ViewPercentage from "@components/sponsor/ViewPercentage.astro";
 
-const pageTitle = "Sponsor";
+const pageTitle = "Conviértete en Sponsor";
+const url = "/sponsor";
+const description =
+  "Únete a The 3 A.M Club como sponsor y muestra tu contenido a nuestra comunidad creativa y nocturna. Suscríbete para aparecer en el podcast y conectar con oyentes que despiertan a nuevas ideas cada madrugada.";
 ---
 
-<Layout pageTitle={pageTitle}>
+<Layout pageTitle={pageTitle} description={description} url={url}>
   <div class="mb-8 text-center">
     <div class="mb-4">
       <div
@@ -156,7 +159,7 @@ const pageTitle = "Sponsor";
   <div class="flex items-center justify-center text-center">
     <a
       href="/contact"
-      class="hover:scale-105 rounded-[10px] border-2 border-cyan-400/50 bg-gradient-to-r from-[#790063] to-purple-600 px-8 py-4 font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:border-cyan-400 hover:from-purple-600 hover:to-[#790063] hover:shadow-cyan-400/20"
+      class="rounded-[10px] border-2 border-cyan-400/50 bg-gradient-to-r from-[#790063] to-purple-600 px-8 py-4 font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:scale-105 hover:border-cyan-400 hover:from-purple-600 hover:to-[#790063] hover:shadow-cyan-400/20"
     >
       <div class="flex items-center space-x-3">
         <div class="h-3 w-3 animate-pulse rounded-full bg-cyan-400"></div>

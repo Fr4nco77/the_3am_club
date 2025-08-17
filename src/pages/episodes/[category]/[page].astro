@@ -9,7 +9,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   episodes = episodes.sort((a, b) => {
     return (
       new Date(b.data.created_at).getTime() -
-      new Date(a.data.created_at).getTime() 
+      new Date(a.data.created_at).getTime()
     );
   });
   const uniqueCategories = [
@@ -32,9 +32,10 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { category } = Astro.params;
 const { page, categories } = Astro.props;
 const { data, url, currentPage, lastPage } = page;
+const description = `Explora los episodios de The 3 A.M Club en la categoría '${category}' y descubre conversaciones nocturnas sobre creatividad, filosofía, cultura y emociones profundas. Sumérgete en nuestras historias y despierta nuevas ideas cada madrugada.`;
 ---
 
-<Layout pageTitle={category}>
+<Layout pageTitle={category} description={description} url={url.current}>
   <EpisodesLayout
     data={data}
     currentCategory={category}
