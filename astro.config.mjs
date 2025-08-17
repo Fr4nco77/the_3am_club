@@ -6,16 +6,22 @@ import rehypeExternalLinks from "rehype-external-links";
 
 import sitemap from "@astrojs/sitemap";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://the3amclub.vercel.app',
+
   redirects: {
     "/episodes": "/episodes/1",
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   integrations: [react(), sitemap()],
+
   markdown: {
     rehypePlugins: [
       [
@@ -27,4 +33,6 @@ export default defineConfig({
       ],
     ],
   },
+
+  adapter: vercel(),
 });

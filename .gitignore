@@ -26,5 +26,5 @@ pnpm-debug.log*
 #local mp3s
 public/mp3s
 
-# Local Netlify folder
-.netlify
+#vercel output
+.vercel
