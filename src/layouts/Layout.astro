@@ -6,17 +6,32 @@ import Sidebar from "@components/sidebar/Sidebar.astro";
 
 interface Props {
   pageTitle?: string;
+  description?: string;
+  url?: string;
 }
 
-const { pageTitle } = Astro.props;
+const {
+  pageTitle,
+  description = "Explora el último episodio de The 3 A.M Club: conversaciones profundas, ideas creativas y reflexiones nocturnas que despiertan la mente durante la madrugada. Descubre nuestro podcast y acompáñanos en cada viaje a las 3 A.M.",
+  url
+} = Astro.props;
 const siteTitle = "The 3 A.M Club";
 const finalTitle = [siteTitle, pageTitle].filter(Boolean).join(" | ");
+const baseUrl = process.env.URL || "http:localhost:4321";
+const finalUrl = url ? baseUrl.concat(url) : baseUrl;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <link rel="canonical" href={finalUrl} />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{finalTitle}</title>
+    <meta name="description" content={description} />
+
     <link
       rel="apple-touch-icon"
       sizes="57x57"
@@ -92,10 +107,36 @@ const finalTitle = [siteTitle, pageTitle].filter(Boolean).join(" | ");
       name="msapplication-TileImage"
       content="/favicons/ms-icon-144x144.png"
     />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{finalTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/favicons/favicon-96x96.png" />
+    <meta property="og:url" content={finalUrl} />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/favicons/favicon-96x96.png" />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: finalTitle,
+        description: description,
+        url: finalUrl,
+        publisher: {
+          "@type": "Organization",
+          name: siteTitle,
+          logo: { "@type": "ImageObject", url: `${baseUrl}/apple-icon.png` },
+        },
+      })}
+    />
     <ClientRouter />
   </head>
   <body>
@@ -103,14 +144,14 @@ const finalTitle = [siteTitle, pageTitle].filter(Boolean).join(" | ");
       class="mx-auto grid h-auto w-full max-w-[1400px] gap-8 px-4 py-8 lg:h-full lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
     >
       <Sidebar />
-      <div class="grid min-h-0 grid-rows-[100px_1fr] gap-8">
+      <main class="grid min-h-0 grid-rows-[100px_1fr] gap-8">
         <Player client:load transition:persist />
         <div
           class="rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm lg:min-h-0 lg:overflow-y-auto"
         >
           <slot />
         </div>
-      </div>
+      </main>
     </div>
   </body>
 </html>
