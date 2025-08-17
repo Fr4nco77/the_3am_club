@@ -1,0 +1,92 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+const pageTitle = "Página no encontrada";
+const description =
+  "La noche te jugó una travesura: la página que buscas no existe. Regresa al club de las 3 A.M. y sigue explorando ideas, sueños y conversaciones que nunca duermen.";
+---
+
+<Layout pageTitle={pageTitle} description={description}>
+  <div class="flex size-full flex-col items-center justify-center">
+    <div class="mb-8">
+      <div class="relative mb-6">
+        <div
+          class="mx-auto flex h-32 w-32 animate-pulse items-center justify-center rounded-full border-2 border-red-500/50"
+        >
+          <div
+            class="flex h-24 w-24 items-center justify-center rounded-full border border-orange-400/60"
+          >
+            <div
+              class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-red-600/30 to-orange-600/30"
+            >
+              <span class="text-4xl font-bold text-white">404</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="absolute -top-4 -left-4 h-3 w-3 animate-ping rounded-full bg-red-400"
+        >
+        </div>
+        <div
+          class="absolute -top-2 -right-6 h-2 w-2 animate-pulse rounded-full bg-orange-400 delay-300"
+        >
+        </div>
+        <div
+          class="absolute -right-4 -bottom-4 h-3 w-3 animate-ping rounded-full bg-yellow-400 delay-700"
+        >
+        </div>
+        <div
+          class="absolute -bottom-2 -left-6 h-2 w-2 animate-pulse rounded-full bg-pink-400 delay-1000"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="mb-8 space-y-4 text-center">
+      <h2 class="mb-4 text-4xl font-bold tracking-wider text-white">
+        <span
+          class="bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent"
+        >
+          DIMENSIÓN PERDIDA
+        </span>
+      </h2>
+      <p class="mb-2 text-lg font-light tracking-wide text-purple-200">
+        Has vagado hacia una realidad inexistente
+      </p>
+      <p class="text-sm font-light tracking-wider text-purple-300 uppercase">
+        ~ LA PÁGINA QUE BUSCAS NO EXISTE EN ESTA DIMENSIÓN ~
+      </p>
+    </div>
+    <div class="mb-8 flex items-center justify-center space-x-4">
+      <div
+        class="h-0.5 w-12 bg-gradient-to-r from-transparent via-red-500 to-transparent"
+      >
+      </div>
+      <div
+        class="h-4 w-4 rotate-45 transform animate-spin border-2 border-orange-400/60"
+      >
+      </div>
+      <div
+        class="h-0.5 w-12 bg-gradient-to-r from-transparent via-yellow-500 to-transparent"
+      >
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center gap-4 text-center">
+      <a
+        href="/episodes/1"
+        class="rounded-[10px] border-2 border-cyan-400/50 bg-gradient-to-r from-[#790063] to-purple-600 px-8 py-4 font-semibold tracking-wider text-white shadow-lg transition-all duration-500 ease-in-out hover:scale-105 hover:border-cyan-400 hover:from-purple-600 hover:to-[#790063] hover:shadow-cyan-400/20"
+      >
+        <div class="flex items-center space-x-3">
+          <div class="h-3 w-3 animate-pulse rounded-full bg-cyan-400"></div>
+          <span>REGRESAR A LOS EPISODIOS</span>
+          <div class="h-3 w-3 animate-pulse rounded-full bg-cyan-400"></div>
+        </div>
+      </a>
+
+      <p class="text-xs font-light tracking-[0.3em] text-purple-300 uppercase">
+        ~ RESTAURAR LA CONEXIÓN DIMENSIONAL ~
+      </p>
+    </div>
+  </div>
+</Layout>
