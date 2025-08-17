@@ -5,13 +5,15 @@ import { getCollection } from "astro:content";
 import EpisodesLayout from "@layouts/EpisodesLayout.astro";
 
 const pageTitle = "Episodios";
+const description =
+  "Explora todos los episodios de The 3 A.M Club: conversaciones nocturnas sobre creatividad, filosofía y cultura que inspiran nuevas ideas cada madrugada. Encuentra tu próximo episodio y acompáñanos en cada viaje a las 3 A.M.";
 
 export const getStaticPaths = (async ({ paginate }) => {
   let episodes = await getCollection("podcast");
   episodes = episodes.sort((a, b) => {
     return (
       new Date(b.data.created_at).getTime() -
-      new Date(a.data.created_at).getTime() 
+      new Date(a.data.created_at).getTime()
     );
   });
   const uniqueCategories = [
@@ -28,7 +30,7 @@ const { page, categories } = Astro.props;
 const { data, url, currentPage, lastPage } = page;
 ---
 
-<Layout pageTitle={pageTitle}>
+<Layout pageTitle={pageTitle} description={description} url={url.current}>
   <EpisodesLayout
     data={data}
     categories={categories}
