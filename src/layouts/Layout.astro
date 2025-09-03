@@ -13,7 +13,7 @@ interface Props {
 const {
   pageTitle,
   description = "Explora el último episodio de The 3 A.M Club: conversaciones profundas, ideas creativas y reflexiones nocturnas que despiertan la mente durante la madrugada. Descubre nuestro podcast y acompáñanos en cada viaje a las 3 A.M.",
-  url
+  url,
 } = Astro.props;
 const siteTitle = "The 3 A.M Club";
 const finalTitle = [siteTitle, pageTitle].filter(Boolean).join(" | ");
@@ -133,7 +133,10 @@ const finalUrl = url ? baseUrl.concat(url) : baseUrl;
         publisher: {
           "@type": "Organization",
           name: siteTitle,
-          logo: { "@type": "ImageObject", url: `${baseUrl}/favicons/apple-icon.png` },
+          logo: {
+            "@type": "ImageObject",
+            url: `${baseUrl}/favicons/apple-icon.png`,
+          },
         },
       })}
     />
@@ -144,7 +147,7 @@ const finalUrl = url ? baseUrl.concat(url) : baseUrl;
       class="mx-auto grid h-auto w-full max-w-[1400px] gap-8 px-4 py-8 lg:h-full lg:grid-cols-[400px_1fr] xl:grid-cols-[450px_1fr]"
     >
       <Sidebar />
-      <main class="grid min-h-0 grid-rows-[100px_1fr] gap-8">
+      <main id="hub" class="grid min-h-0 grid-rows-[100px_1fr] gap-8">
         <Player client:load transition:persist />
         <div
           class="rounded-[10px] border-2 border-[#790063] bg-black/40 p-8 shadow-2xl backdrop-blur-sm lg:min-h-0 lg:overflow-y-auto"

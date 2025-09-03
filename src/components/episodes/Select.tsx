@@ -41,7 +41,7 @@ export default function Select({
           {/* Dropdown Menu */}
           <div className="absolute top-full left-0 z-40 mt-1 w-full overflow-hidden rounded-[8px] border border-purple-500/50 bg-black/90 shadow-2xl backdrop-blur-sm">
             <a
-              href="/episodes/1"
+              href="/episodes/1#hub"
               className="block border-b border-purple-500/20 px-3 py-2 text-sm text-white transition-colors last:border-b-0 hover:bg-purple-500/20 hover:text-cyan-400"
             >
               TODAS LAS CATEGORÍAS
@@ -49,7 +49,7 @@ export default function Select({
             {categories.map((category) => (
               <a
                 key={category}
-                href={`/episodes/${category}/1`}
+                href={`/episodes/${category}/1#hub`}
                 className="block border-b border-purple-500/20 px-3 py-2 text-sm text-white transition-colors last:border-b-0 hover:bg-purple-500/20 hover:text-cyan-400"
               >
                 {category.toUpperCase()}

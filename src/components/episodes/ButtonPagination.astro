@@ -12,7 +12,7 @@ const { url, size, label } = Astro.props;
   <a
     aria-disabled={!url}
     aria-label={label}
-    href={url || "/"}
+    href={`${url}#hub` || "/"}
     class:list={[
       "flex items-center justify-center gap-2 rounded-md border border-purple-500/50 bg-transparent p-1 text-purple-400 hover:bg-purple-500/20 hover:text-white aria-disabled:pointer-events-none aria-disabled:opacity-50",
       !url && "pointer-events-none",
