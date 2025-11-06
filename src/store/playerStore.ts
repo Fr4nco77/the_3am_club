@@ -22,7 +22,7 @@ export const usePlayerStore = create<PlayerStore>((set) => ({
   isPlaying: false,
   currentPodcast: null,
   currentTime: 0,
-  volume: 0.1,
+  volume: 0.8,
   setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
   setCurrentPodcast: (podcast: Podcast) => set({ currentPodcast: podcast }),
   setCurrentTime: (time: number) => set({ currentTime: time }),
