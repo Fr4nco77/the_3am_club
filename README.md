@@ -75,57 +75,63 @@ El proyecto cuenta con un sistema de contacto desacoplado basado en el patrón *
 ### ✨ Características Clave
 
 * **Arquitectura Desacoplada:** Separa completamente la UI (`contact.astro`) y la lógica del servidor de la capa de envío (`/src/contact`).
+* **Configuración Centralizada:** El cliente activo se define en un único archivo de configuración (`providers.ts`), sin necesidad de alterar scripts en las vistas.
 * **Extensibilidad Sencilla:** Integra nuevos canales creando una clase que implemente la interfaz del módulo sin alterar el resto de la aplicación.
 * **Tipado Estricto (TypeScript & Zod):** Validación de datos de entrada en el servidor mediante Zod y contratos de respuesta estrictamente tipados.
-* **Seguridad:** Aislamiento total de las claves de API y credenciales en el entorno del servidor.
-* **Feedback Dinámico:** Control de estados de carga y notificaciones dinámicas (*toasts*) para respuestas de éxito o error.
+* **Seguridad y Feedback UI:** Manejo de variables de entorno en el servidor y notificaciones dinámicas (*toasts*) para estados de carga, éxito o error.
 
 ---
 
 ### ⚙️ Configuración y Uso
 
 #### 1. Seleccionar el Proveedor Activo
-   Abre `src/pages/contact.astro` y asigna el nombre del proveedor en la constante `provider` dentro del `<script>`:
+Abre `src/contact/providers.ts` y asigna el proveedor deseado en la constante `currentProvider`:
 
-   ```typescript
-   // src/pages/contact.astro (dentro del script)
-   const provider = "telegram"; // Nombre del proveedor activo
-   ```
-   Nota: Si se asigna `provider = ""`, la acción procesará la solicitud de forma local sin enviar datos a un servicio externo.
+```typescript
+// src/contact/providers.ts
+export const PROVIDERS = ["telegram"] as const;
+export type Provider = (typeof PROVIDERS)[number];
+
+// Asigna el proveedor activo o deja "" para modo local
+export const currentProvider: Provider | "" = "telegram";
+```
 
 #### 2. Cómo Agregar un Nuevo Proveedor
-   ##### 1. Añadir el identificador a los tipos:
-   ```TypeScript
-   // src/contact/providers.ts
-   export const PROVIDERS = ["telegram", "resend"] as const;
-   ```
-   ##### 2. Crear la clase con la lógica de envío:
-   ``` TypeScript
-   // src/contact/resend.ts
-   import type { ContactInput, SendResult, ContactSender } from "./types";
+##### 1. Añadir el identificador a los tipos:
+```TypeScript
+// src/contact/providers.ts
+export const PROVIDERS = ["telegram", "resend"] as const;
+```
 
-   export default class ResendSender implements ContactSender {
-   provider = "resend";
+##### 2. Crear la clase con la lógica de envío:
+``` TypeScript
+// src/contact/resend.ts
+import type { ContactInput, SendResult, ContactSender } from "./types";
 
-   async send(input: ContactInput): Promise<SendResult> {
-      // Lógica de consumo de la API
-      return { success: true, info: "Mensaje enviado" };
-   }
-   }
-   ```
-   ##### 3. Vincular el proveedor al registro:
+export default class ResendSender implements ContactSender {
+provider = "resend";
 
-   ``` TypeScript
-   // src/contact/index.ts
-   import ResendSender from "./resend";
+async send(input: ContactInput): Promise<SendResult> {
+   // Lógica de consumo de la API
+   return { success: true, info: "Mensaje enviado" };
+}
+}
+```
 
-   export const registry: Record<Provider, ContactSender> = {
-   telegram: new TelegramSender(),
-   resend: new ResendSender(), // Registrar nueva instancia
-   };
-   ```
-   ##### 4. Configurar Variables de Entorno:
-   Agrega las variables necesarias para el nuevo servicio en tu .env local.
+##### 3. Vincular el proveedor al registro:
+
+``` TypeScript
+// src/contact/index.ts
+import ResendSender from "./resend";
+
+export const registry: Record<Provider, ContactSender> = {
+telegram: new TelegramSender(),
+resend: new ResendSender(), // Registrar nueva instancia
+};
+```
+
+##### 4. Configurar Variables de Entorno:
+Agrega las variables necesarias para el nuevo servicio en tu .env local.
 
 ## ➕ Cómo agregar nuevos episodios
 

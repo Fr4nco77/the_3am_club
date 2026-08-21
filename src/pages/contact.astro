@@ -129,64 +129,66 @@ const url = "/contact";
 <script>
   import { actions, isInputError } from "astro:actions";
   import showToast from "@utils/toast";
-  // Aquí configurar el Provider, en caso de dejar vacia la variable se procedera a simular un resultado 200
-  const provider = "";
+  import { currentProvider } from "src/contact/providers";
 
-  const form = document.querySelector("form") as HTMLFormElement | null;
-  const btn = document.getElementById(
-    "submitButton",
-  ) as HTMLButtonElement | null;
+  document.addEventListener("astro:page-load", () => {
+    const provider = currentProvider;
+    const form = document.querySelector("form") as HTMLFormElement | null;
+    const btn = document.getElementById(
+      "submitButton",
+    ) as HTMLButtonElement | null;
 
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (!btn || !form) return;
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!btn || !form) return;
 
-    btn.disabled = true;
+      btn.disabled = true;
 
-    try {
-      const formData = new FormData(form);
-      if (provider) {
-        formData.append("provider", provider);
-      }
+      try {
+        const formData = new FormData(form);
+        if (provider) {
+          formData.append("provider", provider);
+        }
 
-      const { data, error } = await actions.contactAction(formData);
+        const { data, error } = await actions.contactAction(formData);
 
-      if (error) {
-        if (isInputError(error)) {
-          const message = Object.values(error.fields).flat().join(", ");
-          showToast({ message, icon: "⚠️", textColor: "text-red-500" });
+        if (error) {
+          if (isInputError(error)) {
+            const message = Object.values(error.fields).flat().join(", ");
+            showToast({ message, icon: "⚠️", textColor: "text-red-500" });
+          } else {
+            showToast({
+              message: error.message || "Error inesperado",
+              icon: "🚨",
+              textColor: "text-red-500",
+            });
+          }
+          return;
+        }
+
+        if (data?.success) {
+          showToast({
+            message: data.message,
+            icon: "✅",
+            textColor: "text-green-500",
+          });
+          form.reset();
         } else {
           showToast({
-            message: error.message || "Error inesperado",
-            icon: "🚨",
-            textColor: "text-red-500",
+            message: data?.message || "Ocurrió un problema.",
+            icon: "⚠️",
+            textColor: "text-yellow-500",
           });
         }
-        return;
-      }
-
-      if (data?.success) {
+      } catch (err) {
         showToast({
-          message: data.message,
-          icon: "✅",
-          textColor: "text-green-500",
+          message: "Error de conexión con el servidor.",
+          icon: "💥",
+          textColor: "text-red-500",
         });
-        form.reset();
-      } else {
-        showToast({
-          message: data?.message || "Ocurrió un problema.",
-          icon: "⚠️",
-          textColor: "text-yellow-500",
-        });
+      } finally {
+        btn.disabled = false;
       }
-    } catch (err) {
-      showToast({
-        message: "Error de conexión con el servidor.",
-        icon: "💥",
-        textColor: "text-red-500",
-      });
-    } finally {
-      btn.disabled = false;
-    }
+    });
   });
 </script>
