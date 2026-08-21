@@ -3,7 +3,6 @@
 Un sitio web experimental para un **podcast ficticio** llamado *The 3a.m Club*, inspirado en la estética psicodélica de *The Midnight Gospel*.  
 Construido con **Astro**, **React**, **TailwindCSS** y **Zustand**, este proyecto combina **contenido dinámico** (episodios en Markdown) con una **experiencia inmersiva** y un **reproductor interactivo**.
 
----
 
 ## ✨ Características
 
@@ -14,7 +13,6 @@ Construido con **Astro**, **React**, **TailwindCSS** y **Zustand**, este proyect
 - 🧠 **Gestión global del estado** con Zustand.
 - ⚡ **Optimización y rendimiento** con la arquitectura de Astro.
 
----
 
 ## 🛠️ Tecnologías utilizadas
 
@@ -24,27 +22,28 @@ Construido con **Astro**, **React**, **TailwindCSS** y **Zustand**, este proyect
 ![Zustand](https://img.shields.io/badge/Zustand-3B3B3B?style=for-the-badge&logo=zustand&logoColor=white)
 ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
 
----
 
 ## 📂 Estructura del proyecto
-
 ```
 the-3am-club/
 │
-├── public/             # Archivos estáticos (imágenes, favicon)
+├── public/             # Archivos estáticos (favicon, robots.txt)
 ├── src/
+│   ├── actions/        # Astro Actions (server actions y lógica de servidor)
+│   ├── assets/         # Recursos estáticos procesados (imágenes, fuentes estilos)
 │   ├── components/     # Componentes React y Astro
+│   ├── contact/        # Modulo de mensajería (proveedores y lógica de envio)
 │   ├── layouts/        # Plantillas base
 │   ├── pages/          # Rutas del proyecto
 │   ├── store/          # Estado global (Zustand)
+│   ├── utils/          # Funciones auxiliares y helpers (toasts, formateadores)
 │   └── podcasts/       # Episodios en formato Markdown
 │
+├── .env.example        # Plantilla con las variables de entorno necesarias
 ├── astro.config.mjs    # Configuración de Astro
 ├── tailwind.config.js  # Configuración de TailwindCSS
 └── package.json
 ```
-
----
 
 ## 🚀 Instalación y uso
 
@@ -69,7 +68,64 @@ the-3am-club/
    http://localhost:4321
    ```
 
+## 📬 Módulo de Mensajería Modular
+
+El proyecto cuenta con un sistema de contacto desacoplado basado en el patrón **Strategy/Factory**, lo que permite cambiar o añadir proveedores de envío (Telegram, Resend, Discord, etc.) sin modificar la interfaz de usuario ni la Server Action de Astro.
+
+### ✨ Características Clave
+
+* **Arquitectura Desacoplada:** Separa completamente la UI (`contact.astro`) y la lógica del servidor de la capa de envío (`/src/contact`).
+* **Extensibilidad Sencilla:** Integra nuevos canales creando una clase que implemente la interfaz del módulo sin alterar el resto de la aplicación.
+* **Tipado Estricto (TypeScript & Zod):** Validación de datos de entrada en el servidor mediante Zod y contratos de respuesta estrictamente tipados.
+* **Seguridad:** Aislamiento total de las claves de API y credenciales en el entorno del servidor.
+* **Feedback Dinámico:** Control de estados de carga y notificaciones dinámicas (*toasts*) para respuestas de éxito o error.
+
 ---
+
+### ⚙️ Configuración y Uso
+
+#### 1. Seleccionar el Proveedor Activo
+   Abre `src/pages/contact.astro` y asigna el nombre del proveedor en la constante `provider` dentro del `<script>`:
+
+   ```typescript
+   // src/pages/contact.astro (dentro del script)
+   const provider = "telegram"; // Nombre del proveedor activo
+   ```
+   Nota: Si se asigna `provider = ""`, la acción procesará la solicitud de forma local sin enviar datos a un servicio externo.
+
+#### 2. Cómo Agregar un Nuevo Proveedor
+   ##### 1. Añadir el identificador a los tipos:
+   ```TypeScript
+   // src/contact/providers.ts
+   export const PROVIDERS = ["telegram", "resend"] as const;
+   ```
+   ##### 2. Crear la clase con la lógica de envío:
+   ``` TypeScript
+   // src/contact/resend.ts
+   import type { ContactInput, SendResult, ContactSender } from "./types";
+
+   export default class ResendSender implements ContactSender {
+   provider = "resend";
+
+   async send(input: ContactInput): Promise<SendResult> {
+      // Lógica de consumo de la API
+      return { success: true, info: "Mensaje enviado" };
+   }
+   }
+   ```
+   ##### 3. Vincular el proveedor al registro:
+
+   ``` TypeScript
+   // src/contact/index.ts
+   import ResendSender from "./resend";
+
+   export const registry: Record<Provider, ContactSender> = {
+   telegram: new TelegramSender(),
+   resend: new ResendSender(), // Registrar nueva instancia
+   };
+   ```
+   ##### 4. Configurar Variables de Entorno:
+   Agrega las variables necesarias para el nuevo servicio en tu .env local.
 
 ## ➕ Cómo agregar nuevos episodios
 
@@ -89,19 +145,16 @@ the-3am-club/
    ```
 3. Guarda el archivo y se generará automáticamente en el sitio.
 
----
 
 ## 🖼️ Vista previa
 
 ![Preview](public/preview.webp)
 
----
 
 ## 🌱 Inspiración
 
 Este proyecto es un homenaje a la estética vibrante y filosófica de **The Midnight Gospel**, trasladada a la web con herramientas modernas para crear una experiencia inmersiva y fluida.
 
----
 
 ## 📜 Licencia
 
