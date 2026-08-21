@@ -162,7 +162,13 @@ Agrega las variables necesarias para el nuevo servicio en tu .env local.
 Este proyecto es un homenaje a la estética vibrante y filosófica de **The Midnight Gospel**, trasladada a la web con herramientas modernas para crear una experiencia inmersiva y fluida.
 
 
-## 📜 Licencia
+## 📜 Licencia y Términos de Uso
 
-Este proyecto está bajo la licencia **MIT**.  
-Creador: **Franco**.
+Este proyecto se distribuye bajo una **Licencia Comercial No Exclusiva**.  
+Desarrollado y comercializado por: **Franco Carreras**.
+
+### 📋 Condiciones de Uso
+
+* **Uso del Proyecto:** Adquieres el derecho de uso, modificación, despliegue y personalización del código fuente para tus propios proyectos personales o comerciales.
+* **Derechos del Creador:** El autor (**Franco Carreras**) conserva la propiedad intelectual del código base original y se reserva el derecho de seguir comercializando, distribuyendo y utilizando este proyecto de manera indefinida.
+* **Restricción de Reventa:** Esta compra te otorga una licencia de uso. Queda estrictamente prohibida la reventa, redistribución o sublicenciamiento del código fuente original a terceros como un producto de plantilla o *software standalone*.
