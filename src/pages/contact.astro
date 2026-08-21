@@ -87,6 +87,7 @@ const url = "/contact";
 
     <div class="flex items-center justify-center text-center">
       <button
+        id="submitButton"
         type="submit"
         class="cursor-pointer rounded-[10px] border-2 border-cyan-400/50 bg-gradient-to-r from-[#790063] to-purple-600 px-8 py-4 font-semibold tracking-wider text-white shadow-lg transition-all duration-300 hover:border-cyan-400 hover:from-purple-600 hover:to-[#790063] hover:shadow-cyan-400/20"
       >
@@ -127,63 +128,65 @@ const url = "/contact";
 
 <script>
   import { actions, isInputError } from "astro:actions";
+  import showToast from "@utils/toast";
+  // Aquí configurar el Provider, en caso de dejar vacia la variable se procedera a simular un resultado 200
+  const provider = "";
 
-  const form = document.querySelector("form");
-  const btn = document.querySelector("button[type=submit]");
+  const form = document.querySelector("form") as HTMLFormElement | null;
+  const btn = document.getElementById(
+    "submitButton",
+  ) as HTMLButtonElement | null;
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    btn!.setAttribute("disabled", "true");
+    if (!btn || !form) return;
 
-    const formData = new FormData(form);
-    const { data, error } = await actions.contactAction(formData);
+    btn.disabled = true;
 
-    btn!.removeAttribute("disabled");
+    try {
+      const formData = new FormData(form);
+      if (provider) {
+        formData.append("provider", provider);
+      }
 
-    if (isInputError(error)) {
-      const message = Object.values(error.fields).flat().join(", ");
-      showToast({ message, icon: "⚠️", textColor: "text-red-500" });
-    } else {
+      const { data, error } = await actions.contactAction(formData);
+
+      if (error) {
+        if (isInputError(error)) {
+          const message = Object.values(error.fields).flat().join(", ");
+          showToast({ message, icon: "⚠️", textColor: "text-red-500" });
+        } else {
+          showToast({
+            message: error.message || "Error inesperado",
+            icon: "🚨",
+            textColor: "text-red-500",
+          });
+        }
+        return;
+      }
+
+      if (data?.success) {
+        showToast({
+          message: data.message,
+          icon: "✅",
+          textColor: "text-green-500",
+        });
+        form.reset();
+      } else {
+        showToast({
+          message: data?.message || "Ocurrió un problema.",
+          icon: "⚠️",
+          textColor: "text-yellow-500",
+        });
+      }
+    } catch (err) {
       showToast({
-        message: data?.message || "Enviado con éxito",
-        icon: "✅",
-        textColor: "text-green-500",
+        message: "Error de conexión con el servidor.",
+        icon: "💥",
+        textColor: "text-red-500",
       });
-      form.reset();
+    } finally {
+      btn.disabled = false;
     }
   });
-
-  function showToast({
-    message,
-    icon,
-    textColor,
-  }: {
-    message: string;
-    icon: string;
-    textColor: string;
-  }) {
-    const toast = document.createElement("div");
-
-    toast.innerHTML = `
-      <div class="fixed top-4 right-4 lg:top-8 lg:right-8 flex items-center font-semibold gap-2 px-4 py-2 rounded-[10px] border-2 border-[#790063] bg-black/80 p-8 shadow-2xl transform transition-transform duration-500 ease-in-out opacity-0 -translate-y-4 z-20 ${textColor}">
-        <span>${icon}</span>
-        <span>${message}</span>
-      </div>
-    `;
-    document.body.appendChild(toast);
-
-    const toastEl = toast.firstElementChild;
-    if (!toastEl) return;
-
-    requestAnimationFrame(() => {
-      toastEl.classList.remove("opacity-0", "-translate-y-4");
-      toastEl.classList.add("opacity-100", "translate-y-0");
-    });
-
-    setTimeout(() => {
-      toastEl.classList.remove("opacity-100", "translate-y-0");
-      toastEl.classList.add("opacity-0", "-translate-y-4");
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
-  }
 </script>
